@@ -8,6 +8,7 @@ usage() {
     echo "  --install           Install Miniconda"
     echo "  --set-env           Create Conda environments"
     echo "  --remove-env        Remove Conda environment"
+    echo "  --add-to-path       Adds conda-manager to ~/.local/bin"
     echo "  --dry-run           Simulate actions without executing them"
     echo "  --help              Display this help message"
 }
@@ -113,9 +114,16 @@ case "$1" in
     --remove-env)
         remove_env
         ;;
+    --add-to-path)
+        cd ~/.local/bin/
+        ln -s ~/Documents/bioinfo/bioinfo-scripts/conda-manager.sh conda-manager
+        cd -
+        ;;
     --help)
         usage
         ;;
+
+
     *)
         echo "Error: Unknown option '$1'. Valid options are: --install, --set-env, --remove-env, --dry-run, --help."
         usage
