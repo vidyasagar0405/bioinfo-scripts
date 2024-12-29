@@ -52,6 +52,7 @@ create_envs() {
         fi
     done
 
+    conda env list
     echo "Conda environments creation process completed."
 }
 
@@ -79,6 +80,7 @@ remove_env() {
         fi
     done
 
+    conda env list
     echo "Conda environments removal process completed."
 }
 
