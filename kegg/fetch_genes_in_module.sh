@@ -1,5 +1,5 @@
 ORG="rsz"
-MODULE="rsz_M00113"
+MODULE="rsz_M00005"
 ID_OUTPUT="${ORG}_modules.tsv"
 MODULE_GENES="${ORG}_${MODULE}_genes.tsv"
 OUTPUT="${MODULE}_genes.fa"
