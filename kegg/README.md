@@ -1,8 +1,8 @@
 ### scripts to retrive gene nucleotide sequence from KEGG pathway/module
 
-> [!NOTE]
+> [!WARNING]
 > The scripts comply with KEGG's requests the users to only send 3 requests per second
-> [!WARNING]  SO DO NOT PARALLELISE THE SCRIPTS
+> SO DO NOT PARALLELISE THE SCRIPTS
 
 # `fetch_all_genes.py`
 
