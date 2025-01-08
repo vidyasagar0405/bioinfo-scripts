@@ -25,10 +25,10 @@ options:
 ## Usage examples:
 
 ```bash
-./fetch_all_genes.py --org rsz --pathway rsz_00730 # generates rsz00966_genes.fa rsz00966_genes_id.tsv
+./fetch_all_genes.py --org rsz --pathway rsz00730 # generates rsz00966_genes.fa rsz00966_genes_id.tsv
 ./fetch_all_genes.py --org rsz --module rsz_M00005 # generates rsz_M00005_genes.fa rsz_modules.tsv rsz_rsz_M00005_genes.tsv
 
-./fetch_all_genes.py --org rsz --pathway rsz_00730 --output Thiamine_metabolism.fa # generates rsz00730_genes_id.tsv Thiamine_metabolism.fa
+./fetch_all_genes.py --org rsz --pathway rsz00730 --output Thiamine_metabolism.fa # generates rsz00730_genes_id.tsv Thiamine_metabolism.fa
 ./fetch_all_genes.py --org rsz --module rsz_M00005 --output PRPP.fa # generates PRPP.fa rsz_modules.tsv rsz_rsz_M00005_genes.tsv 
 ```
 
