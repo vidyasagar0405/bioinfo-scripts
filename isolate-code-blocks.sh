@@ -1,2 +1,4 @@
-OUT=basename -s .md $1
-sed -n '/^```/,/^```/p' $1 | sed '/^```/d' > ${OUT}.sh
+#!/bin/bash
+
+OUT=$(basename -s .md "$1")  # Get filename without .md extension
+sed -n '/^```/,/^```/p' "$1" | sed '/^```/d' > "${OUT}.sh"
