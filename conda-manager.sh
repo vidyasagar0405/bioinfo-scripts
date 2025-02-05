@@ -36,6 +36,7 @@ create_envs() {
         [QC]="fastqc multiqc"
         [trimmomatic]="trimmomatic"
         [samtools]="bwa samtools"
+        [bcftools]="bcftools samtools"
         [picard]="picard"
         [gatk]="gatk"
         [snpEff]="snpEff"
@@ -43,7 +44,7 @@ create_envs() {
 
     for env in "${!envs_packages[@]}"; do
         if [[ "$DRY_RUN" == true ]]; then
-            echo "[DRY RUN] Would create environment '$env' with packages: ${envs_packages[$env]}"
+            echo "[DRY RUN] conda create -y -n "$env" -c conda-forge -c bioconda ${envs_packages[$env]}"
         else
             if conda info --envs | grep -q "^$env[[:space:]]"; then
                 echo "Environment '$env' already exists. Skipping creation."
@@ -59,27 +60,27 @@ create_envs() {
 
 # Function to remove a Conda environment
 remove_env() {
-    echo "Removing Conda environments..."
-    declare -A envs=(
-        [QC]
-        [trimmomatic]
-        [samtools]
-        [picard]
-        [gatk]
-        [snpEff]
-    )
 
-    for env in "${!envs[@]}"; do
+    echo "Removing Conda environments..."
         if [[ "$DRY_RUN" == true ]]; then
-            echo "[DRY RUN] Would remove environment '$env'"
+            echo "[DRY RUN] Would remove environment 'QC"
+            echo "[DRY RUN] Would remove environment 'bcftools"
+            echo "[DRY RUN] Would remove environment 'gatk"
+            echo "[DRY RUN] Would remove environment 'nextflow"
+            echo "[DRY RUN] Would remove environment 'picard"
+            echo "[DRY RUN] Would remove environment 'samtools"
+            echo "[DRY RUN] Would remove environment 'snpEff"
+            echo "[DRY RUN] Would remove environment 'trimmomatic"
         else
-            if conda info --envs | grep -q "^$env[[:space:]]"; then
-                conda env remove -y -n "$env"
-            else
-                echo "Environment '$env' does not exist. Skipping removal."
-            fi
+            conda env remove -y -n QC
+            conda env remove -y -n bcftools
+            conda env remove -y -n gatk
+            conda env remove -y -n nextflow
+            conda env remove -y -n picard
+            conda env remove -y -n samtools
+            conda env remove -y -n snpEff
+            conda env remove -y -n trimmomatic
         fi
-    done
 
     conda env list
     echo "Conda environments removal process completed."
