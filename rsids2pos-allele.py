@@ -23,15 +23,20 @@ def get_snp_info(rsid):
             pos = ":".join(pos)  # Convert list back to a string
 
             alleles = mappings[0].get("allele_string", "N/A")  # Get allele info
-            ancestral_allele = mappings[0].get("ancestral_allele", "N/A")  # Get ancestral allele
+            ancestral_allele = mappings[0].get("ancestral_allele", None)  # Get ancestral allele
 
-            ancestral_allele_pos = alleles.find(ancestral_allele)  # Find position of ancestral allele in allele string
-            alleles = alleles[:ancestral_allele_pos+1] + ">" + alleles[ancestral_allele_pos + 2:]
-            alleles = alleles.replace("/", ",")
+            # If ancestral allele is None, use the first allele
+            if not ancestral_allele:
+                ancestral_allele = alleles.split("/")[0]  # Take first allele as ancestral
+
+            # Replace "/" with ",", and ensure correct formatting
+            alleles_list = alleles.split("/")
+            alleles_list.remove(ancestral_allele)  # Remove ancestral allele from the list
+            formatted_alleles = ancestral_allele + ">" + ",".join(alleles_list) if alleles_list else ancestral_allele + ">"
 
             print(f"Fetched data for rsID {rsid}...")
 
-            return [rsid, pos, alleles]
+            return [rsid, pos, formatted_alleles]
 
     return [rsid, "N/A", "N/A"]
 
@@ -52,4 +57,3 @@ df = pd.DataFrame(results, columns=["rsID", "Position", "Alleles"])
 df.to_csv(output_file, index=False, sep="\t")
 
 print(f"Results saved to {output_file}")
-
