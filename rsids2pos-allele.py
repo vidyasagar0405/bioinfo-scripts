@@ -1,13 +1,13 @@
 import pandas as pd
 import requests
 import sys
+from rich import print
 
 
 # Function to fetch data from Ensembl API
 def get_snp_info(rsid):
-    server = "https://rest.ensembl.org"
-    ext = f"/variant_recoder/human/{rsid}?"
-    response  = requests.get(server+ext, headers={ "Content-Type" : "application/json"})
+    url = f"https://rest.ensembl.org/variation/human/{rsid}?content-type=application/json"
+    response = requests.get(url)
 
     if response.ok:
         data = response.json()
@@ -35,9 +35,12 @@ def get_snp_info(rsid):
             alleles_list.remove(ancestral_allele)  # Remove ancestral allele from the list
             formatted_alleles = ancestral_allele + ">" + ",".join(alleles_list) if alleles_list else ancestral_allele + ">"
 
-            print(f"Fetched data for rsID {rsid}...")
+            print(f"[green]Fetched data for rsID {rsid}...[/green]")
 
             return [rsid, pos, formatted_alleles]
+
+    else:
+        print(f"[red]Failed to fetch data for rsID {rsid}...status code: {response.status_code}[/red]")
 
     return [rsid, "N/A", "N/A"]
 
@@ -57,4 +60,4 @@ results = [get_snp_info(rsid) for rsid in rsids]
 df = pd.DataFrame(results, columns=["rsID", "Position", "Alleles"])
 df.to_csv(output_file, index=False, sep="\t")
 
-print(f"Results saved to {output_file}")
+print(f"[green]Results saved to {output_file}[/green]")
