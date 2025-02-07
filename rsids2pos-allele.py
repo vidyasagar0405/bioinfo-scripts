@@ -5,10 +5,11 @@ import sys
 
 # Function to fetch data from Ensembl API
 def get_snp_info(rsid):
-    url = f"https://rest.ensembl.org/variation/human/{rsid}?content-type=application/json"
-    response = requests.get(url)
+    server = "https://rest.ensembl.org"
+    ext = f"/variant_recoder/human/{rsid}?"
+    response  = requests.get(server+ext, headers={ "Content-Type" : "application/json"})
 
-    if response.status_code == 200:
+    if response.ok:
         data = response.json()
         mappings = data.get("mappings", [])
         if mappings:
