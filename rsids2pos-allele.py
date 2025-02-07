@@ -20,7 +20,7 @@ def get_snp_info(rsid):
             if start_pos.strip() == end_pos.strip():
                 pos = [pos[0]]  # Keep only the first part (chr:start)
 
-            pos = ":".join(pos)  # Convert list back to a string
+            pos = "-".join(pos)  # Convert list back to a string
 
             alleles = mappings[0].get("allele_string", "N/A")  # Get allele info
             ancestral_allele = mappings[0].get("ancestral_allele", None)  # Get ancestral allele
