@@ -1,0 +1,3 @@
+[submodule "kegg-cli"]
+	path = kegg-cli
+	url = https://github.com/vidyasagar0405/kegg-cli
