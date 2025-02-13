@@ -1,0 +1,12 @@
+#!/bin/bash
+# Description: Convert all pdf files in the current directory to jpg files
+
+OUT="compressed-50"
+
+mkdir -p "${OUT}"
+
+for i in *.pdf; do
+    convert -density 200x200 -quality 50 -compress jpeg "$i" "${OUT}/${i%.pdf}-compressed.pdf"
+done
+
+# \gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile="${OUT}-compressed.pdf" ./*.pdf
