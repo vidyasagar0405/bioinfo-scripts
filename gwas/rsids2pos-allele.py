@@ -13,15 +13,16 @@ def get_snp_info(rsid):
         data = response.json()
         mappings = data.get("mappings", [])
         if mappings:
-            pos = mappings[0]["location"].split("-")  # Split start-end positions
+            # print(f"{rsid}: {mappings[0]["location"]}")
+            raw_pos = mappings[0]["location"].split("-")  # Split start-end positions
 
-            start_pos = pos[0].split(":")[1]  # Extract number part after "chr:"
-            end_pos = pos[1] if len(pos) > 1 else start_pos  # Handle cases where there's no range
+            start_pos = raw_pos[0].split(":")[1]  # Extract number part after "chr:"
+            end_pos = raw_pos[1] if len(raw_pos) > 1 else start_pos  # Handle cases where there's no range
 
             if start_pos.strip() == end_pos.strip():
-                pos = [pos[0]]  # Keep only the first part (chr:start)
+                raw_pos = [raw_pos[0]]  # Keep only the first part (chr:start)
 
-            pos = "-".join(pos)  # Convert list back to a string
+            pos = "-".join(raw_pos)  # Convert list back to a string
 
             alleles = mappings[0].get("allele_string", "N/A")  # Get allele info
             ancestral_allele = mappings[0].get("ancestral_allele", None)  # Get ancestral allele
@@ -35,7 +36,7 @@ def get_snp_info(rsid):
             alleles_list.remove(ancestral_allele)  # Remove ancestral allele from the list
             formatted_alleles = ancestral_allele + ">" + ",".join(alleles_list) if alleles_list else ancestral_allele + ">"
 
-            print(f"[green]Fetched data for rsID {rsid}...[/green]")
+            print(f"[green]Fetched data for rsID {rsid} ...[/green]")
 
             return [rsid, pos, formatted_alleles]
 
