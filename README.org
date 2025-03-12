@@ -14,8 +14,11 @@ tree -L 2 --noreport
 ├── conda-activate.sh
 ├── conda-manager.sh
 ├── gwas
+│   ├── gene_loc_from_name.py
 │   ├── gwas-associatons-from-gene-name.sh
-│   └── rsids2pos-allele.py
+│   ├── rsids2pos-allele.py
+│   ├── UCSC_gene_info_from_gene_name_file_csv.py
+│   └── UCSC_gene_info_from_gene_name_full_info.py
 ├── install-scripts
 │   ├── install-conda.sh
 │   ├── install-edirect.sh
@@ -27,17 +30,16 @@ tree -L 2 --noreport
 │   ├── README.md
 │   ├── src
 │   └── tests
-├── README.md
 ├── README.org
 ├── utils
 │   ├── doi2year.py
 │   ├── dois.tsv
 │   ├── dois_with_metadata.tsv
-│   ├── dois_with_year.tsv
 │   ├── extract_pdf_links.py
 │   ├── get_metadata_from_doi.py
 │   ├── isolate-code-blocks.sh
 │   ├── pdf-compression
+│   ├── print_snps.py
 │   └── xlsx2csv-sep-sheets-to-files.py
 └── variant-calling
     └── aggregate_mpile_and_haplotypecaller.sh
