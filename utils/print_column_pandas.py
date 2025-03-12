@@ -10,7 +10,7 @@ Arguments:
     -d, --delimiter  Delimiter used in the file (default: tab)
 
 Example:
-    python script.py -i data.tsv -c gene_id -d "\t"
+    python script.py -i data.tsv -c gene_id -d ","
 """
 
 import pandas as pd
@@ -28,8 +28,8 @@ def main():
     parser.add_argument(
         "-d",
         "--delimiter",
-        default=",",
-        help="Delimiter used in the file (default: comma)",
+        default="\t",
+        help="Delimiter used in the file (default: tab)",
     )
 
     args = parser.parse_args()

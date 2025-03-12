@@ -39,7 +39,7 @@ tree -L 2 --noreport
 │   ├── get_metadata_from_doi.py
 │   ├── isolate-code-blocks.sh
 │   ├── pdf-compression
-│   ├── print_snps.py
+│   ├── print_column_pandas.py
 │   └── xlsx2csv-sep-sheets-to-files.py
 └── variant-calling
     └── aggregate_mpile_and_haplotypecaller.sh
