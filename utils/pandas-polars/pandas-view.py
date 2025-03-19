@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 This script extracts and prints values from a specified column in a CSV/TSV file.
 

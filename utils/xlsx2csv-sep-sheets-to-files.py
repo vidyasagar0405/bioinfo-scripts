@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import pandas as pd
 
 # Path to your Excel file

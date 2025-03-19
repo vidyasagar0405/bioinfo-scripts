@@ -5,7 +5,7 @@
 * A collection of my bioinfomatics scripts
 
 #+begin_src sh :results output :exports results
-tree -L 2 --noreport
+tree -L 3 --noreport
 #+end_src
 
 #+RESULTS:
@@ -23,23 +23,22 @@ tree -L 2 --noreport
 │   ├── install-conda.sh
 │   ├── install-edirect.sh
 │   └── install-nextflow.sh
-├── kegg-cli
-│   ├── dist
-│   ├── LICENSE.txt
-│   ├── pyproject.toml
-│   ├── README.md
-│   ├── src
-│   └── tests
 ├── README.org
 ├── utils
-│   ├── doi2year.py
-│   ├── dois.tsv
-│   ├── dois_with_metadata.tsv
+│   ├── csv2sql.py
+│   ├── doi-papers
+│   │   ├── bioproject2doi.py
+│   │   ├── doi2year.py
+│   │   ├── dois.tsv
+│   │   ├── dois_with_metadata.tsv
+│   │   └── get_metadata_from_doi.py
 │   ├── extract_pdf_links.py
-│   ├── get_metadata_from_doi.py
 │   ├── isolate-code-blocks.sh
+│   ├── pandas-polars
+│   │   ├── pandas-view.py
+│   │   ├── polars-check-dups.py
+│   │   └── polars-view.py
 │   ├── pdf-compression
-│   ├── print_column_pandas.py
 │   └── xlsx2csv-sep-sheets-to-files.py
 └── variant-calling
     └── aggregate_mpile_and_haplotypecaller.sh
