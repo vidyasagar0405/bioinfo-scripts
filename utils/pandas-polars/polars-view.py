@@ -54,6 +54,7 @@ def main():
     lf = pl.scan_csv(
         args.input,
         separator=args.delimiter,
+        comment_prefix="#",
         null_values=["", "NA", "N/A", "null", "NULL", "None", "NaN", "Not provided"]
     )
 

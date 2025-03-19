@@ -35,7 +35,7 @@ def main():
 
     args = parser.parse_args()
 
-    df = pd.read_csv(args.input, sep=args.delimiter)
+    df = pd.read_csv(args.input, sep=args.delimiter, comment="#")
 
     if args.column not in df.columns:
         raise ValueError(f"Column '{args.column}' not found in the input file.")
