@@ -71,10 +71,10 @@ def main():
     print(f"Checking for duplicates based on {len(subset_cols)} columns: {', '.join(subset_cols)}")
 
     # First, count total rows
-    total_rows = lf.select(pl.count()).collect().item()
+    total_rows = lf.select(pl.len()).collect().item()
 
     # Get count of unique combinations
-    unique_rows = lf.select(subset_cols).unique().select(pl.count()).collect().item()
+    unique_rows = lf.select(subset_cols).unique().select(pl.len()).collect().item()
 
     # Calculate duplicates
     duplicate_count = total_rows - unique_rows
@@ -96,7 +96,7 @@ def main():
         dup_rows = (
             lf.select(subset_cols)
             .group_by(subset_cols)
-            .agg(pl.count().alias("freq"))
+            .agg(pl.len().alias("freq"))
             .filter(pl.col("freq") > 1)
             .sort("freq", descending=True)
             .limit(args.limit)

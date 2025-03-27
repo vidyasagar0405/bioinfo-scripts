@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 """
 This script extracts and prints values from a specified column in a CSV/TSV file.
 Usage:
@@ -13,6 +14,7 @@ Arguments:
 Example:
     python script.py -i data.tsv -c gene_id -d "," --unique --count --sort
 """
+
 import polars as pl
 import argparse
 
@@ -68,7 +70,7 @@ def main():
 
     if args.unique or args.count:
         if args.count:
-        # Count frequency of each value with better null handling
+        # Count frequency of each value with null handling
             query = (
                 lf.select(
                     pl.when(pl.col(args.column).is_null())

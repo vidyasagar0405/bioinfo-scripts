@@ -2,12 +2,15 @@ import pandas as pd
 import requests
 import sys
 from rich import print
+from rich.progress import track
+from time import sleep
 
 
 # Function to fetch data from Ensembl API
 def get_snp_info(rsid):
     url = f"https://rest.ensembl.org/variation/human/{rsid}?content-type=application/json"
     response = requests.get(url)
+    sleep(0.01)
 
     if response.ok:
         data = response.json()
@@ -33,10 +36,15 @@ def get_snp_info(rsid):
 
             # Replace "/" with ",", and ensure correct formatting
             alleles_list = alleles.split("/")
-            alleles_list.remove(ancestral_allele)  # Remove ancestral allele from the list
+
+            try:
+                alleles_list.remove(ancestral_allele)  # Remove ancestral allele from the list
+            except ValueError as e:
+                print(f"Error formatting {rsid}: {e}")
+
             formatted_alleles = ancestral_allele + ">" + ",".join(alleles_list) if alleles_list else ancestral_allele + ">"
 
-            print(f"[green]Fetched data for rsID {rsid} ...[/green]")
+            # print(f"[green]Fetched data for rsID {rsid} ...[/green]")
 
             return [rsid, pos, formatted_alleles]
 
@@ -46,19 +54,23 @@ def get_snp_info(rsid):
     return [rsid, "N/A", "N/A"]
 
 
-# Load rsIDs from a file (one rsID per line)
-input_file = sys.argv[1]
-output_file = sys.argv[2]
+def main():
+    # Load rsIDs from a file (one rsID per line)
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
 
-# Read rsIDs from file
-with open(input_file, "r") as f:
-    rsids = [line.strip() for line in f.readlines()]
+    # Read rsIDs from file
+    with open(input_file, "r") as f:
+        rsids = [line.strip() for line in f.readlines()]
 
-# Fetch data for each rsID
-results = [get_snp_info(rsid) for rsid in rsids]
+    # Fetch data for each rsID
+    results = [get_snp_info(rsid) for rsid in track(rsids, "Fetching ...")]
 
-# Save results to CSV
-df = pd.DataFrame(results, columns=["rsID", "Position", "Alleles"])
-df.to_csv(output_file, index=False, sep="\t")
+    # Save results to CSV
+    df = pd.DataFrame(results, columns=["rsID", "Position", "Alleles"])
+    df.to_csv(output_file, index=False, sep="\t")
 
-print(f"[green]Results saved to {output_file}[/green]")
+    print(f"[green]Results saved to {output_file}[/green]")
+
+if __name__ == "__main__":
+    main()
